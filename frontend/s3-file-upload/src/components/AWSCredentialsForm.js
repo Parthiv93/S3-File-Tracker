@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AWSCredentialsForm = ({ setAWSCredentials, onFormSubmit }) => {
+const AWSCredentialsForm = ({ onFormSubmit }) => {
   const [accessKeyId, setAccessKeyId] = useState('');
   const [secretAccessKey, setSecretAccessKey] = useState('');
   const [region, setRegion] = useState('');
@@ -8,21 +8,20 @@ const AWSCredentialsForm = ({ setAWSCredentials, onFormSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await fetch('/api/aws-credentials', {
+      const response = await fetch('http://localhost:3001/api/aws-credentials', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ accessKeyId, secretAccessKey, region, bucketName }),
       });
-  
+
       const responseData = await response.json();
-  
       if (response.ok) {
         console.log('AWS Credentials submitted successfully:', responseData);
-        setAWSCredentials({ accessKeyId, secretAccessKey, region, bucketName });
+        onFormSubmit(); // Call the parent component's onFormSubmit callback
       } else {
         console.error('Failed to submit AWS credentials:', responseData);
       }
@@ -30,7 +29,6 @@ const AWSCredentialsForm = ({ setAWSCredentials, onFormSubmit }) => {
       console.error('Error submitting AWS credentials:', error);
     }
   };
-  
 
   return (
     <form onSubmit={handleSubmit}>
@@ -62,4 +60,5 @@ const AWSCredentialsForm = ({ setAWSCredentials, onFormSubmit }) => {
     </form>
   );
 };
+
 export default AWSCredentialsForm;

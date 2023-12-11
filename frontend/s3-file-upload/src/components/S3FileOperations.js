@@ -6,7 +6,8 @@ const S3FileOperations = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileData, setFileData] = useState(null);
-  const [awsCredentials, setAWSCredentials] = useState(null); 
+  const [awsCredentials, setAWSCredentials] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -18,9 +19,11 @@ const S3FileOperations = () => {
       try {
         const formData = new FormData();
         formData.append('file', selectedFile);
-
+        formData.append('fileName', selectedFile.name);
+        formData.append('fileContent', 'Sample content');
+  
         await axios.post('http://localhost:3001/api/upload', formData);
-
+  
         console.log('File uploaded to S3 successfully');
         fetchUploadedFiles();
       } catch (error) {
@@ -33,7 +36,10 @@ const S3FileOperations = () => {
     try {
       const credentialsResponse = await axios.get('http://localhost:3001/api/aws-credentials');
       const credentials = credentialsResponse.data;
-  
+
+      setAWSCredentials(credentials); // Set AWS credentials
+      setLoading(false); // Set loading to false
+
       const response = await axios.get('http://localhost:3001/api/files', {
         headers: {
           'x-access-key': credentials.accessKeyId,
@@ -42,13 +48,12 @@ const S3FileOperations = () => {
           'x-bucket-name': credentials.bucketName,
         },
       });
-  
+
       setUploadedFiles(response.data.files || []);
     } catch (error) {
       console.error('Error fetching uploaded files:', error);
     }
   };
-  
 
   const handleViewFile = async (fileName) => {
     try {
@@ -66,7 +71,9 @@ const S3FileOperations = () => {
   return (
     <div>
       <h2>S3 File Operations</h2>
-      {awsCredentials ? (
+      {loading ? (
+        <p>Loading...</p>
+      ) : awsCredentials ? (
         <>
           <div>
             <h3>Upload JSON File to S3</h3>

@@ -1,41 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import S3FileOperations from './components/S3FileOperations';
 import AWSCredentialsForm from './components/AWSCredentialsForm';
 
 const App = () => {
-  const [showAWSForm, setShowAWSForm] = useState(false);
+  const [showAWSForm, setShowAWSForm] = useState(true);
+  const [credentialsSubmitted, setCredentialsSubmitted] = useState(false);
 
-  useEffect(() => {
-    // Check if AWS credentials exist
-    const checkAWSCredentials = async () => {
-      try {
-        const response = await fetch('/api/check-aws-credentials');
-        const data = await response.json();
-
-        if (!data.hasCredentials) {
-          // Show the form if credentials don't exist
-          setShowAWSForm(true);
-        }
-      } catch (error) {
-        console.error('Error checking AWS credentials:', error);
-      }
-    };
-
-    checkAWSCredentials();
-  }, []); // Run once on component mount
+  const handleFormSubmit = () => {
+    setShowAWSForm(false);
+    setCredentialsSubmitted(true);
+  };
 
   return (
     <div className="container mt-3">
       {showAWSForm && (
-        <AWSCredentialsForm
-        setAWSCredentials={setAWSCredentials}
-        onFormSubmit={() => setShowAWSForm(false)}
-      />
-      
+        <AWSCredentialsForm onFormSubmit={handleFormSubmit} />
       )}
-      <S3FileOperations />
+      {credentialsSubmitted && !showAWSForm && <S3FileOperations />}
     </div>
   );
 };

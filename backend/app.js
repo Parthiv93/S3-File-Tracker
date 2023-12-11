@@ -90,7 +90,8 @@ const configureS3 = async () => {
 
 app.post('/api/upload', upload, async (req, res) => {
   const uploadedFile = req.files[0];
-  const { fileName, fileContent } = req.body;
+  const fileName = req.body.fileName; // Retrieve fileName from the request body
+  const fileContent = uploadedFile.buffer.toString('utf-8'); // Convert buffer to string
 
   try {
     const s3 = await configureS3();
@@ -120,6 +121,16 @@ app.post('/api/upload', upload, async (req, res) => {
     res.json({ message: 'File uploaded to S3 and metadata saved to MongoDB successfully' });
   } catch (error) {
     console.error('Error uploading file to S3 or saving metadata to MongoDB:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/api/check-aws-credentials', async (req, res) => {
+  try {
+    const credentials = await retrieveAWSCredentials();
+    res.json({ hasCredentials: !!credentials });
+  } catch (error) {
+    console.error('Error checking AWS credentials:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
