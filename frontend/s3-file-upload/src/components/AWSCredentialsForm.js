@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/AWSForm.css';
 
 const AWSCredentialsForm = ({ onFormSubmit }) => {
   const [accessKeyId, setAccessKeyId] = useState('');
@@ -21,7 +22,7 @@ const AWSCredentialsForm = ({ onFormSubmit }) => {
       const responseData = await response.json();
       if (response.ok) {
         console.log('AWS Credentials submitted successfully:', responseData);
-        onFormSubmit(); // Call the parent component's onFormSubmit callback
+        onFormSubmit(); 
       } else {
         console.error('Failed to submit AWS credentials:', responseData);
       }
@@ -31,33 +32,32 @@ const AWSCredentialsForm = ({ onFormSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Access Key ID:
-        <input type="text" value={accessKeyId} onChange={(e) => setAccessKeyId(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Secret Access Key:
-        <input
-          type="text"
-          value={secretAccessKey}
-          onChange={(e) => setSecretAccessKey(e.target.value)}
-        />
-      </label>
-      <br />
-      <label>
-        Region:
-        <input type="text" value={region} onChange={(e) => setRegion(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Bucket Name:
-        <input type="text" value={bucketName} onChange={(e) => setBucketName(e.target.value)} />
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <div className="AWSCredentialsForm">
+      <h2>Enter AWS Credentials</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Access Key ID:
+          <input type="text" value={accessKeyId} onChange={(e) => setAccessKeyId(e.target.value)} />
+        </label>
+        <label>
+          Secret Access Key:
+          <input
+            type="text"
+            value={secretAccessKey}
+            onChange={(e) => setSecretAccessKey(e.target.value)}
+          />
+        </label>
+        <label>
+          Region:
+          <input type="text" value={region} onChange={(e) => setRegion(e.target.value)} />
+        </label>
+        <label>
+          Bucket Name:
+          <input type="text" value={bucketName} onChange={(e) => setBucketName(e.target.value)} />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
   );
 };
 

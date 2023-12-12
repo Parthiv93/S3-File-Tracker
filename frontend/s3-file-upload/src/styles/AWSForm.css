@@ -1,0 +1,82 @@
+body {
+  background-color: #FF9900; /* Amazon Orange */
+  margin: 0; /* Remove default margin */
+  overflow: hidden; /* Prevent default body margin */
+}
+
+.AWSCredentialsForm {
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+  padding: 40px 30px 30px 30px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  transform: translate(-50%, -50%);
+  transition: transform 300ms, box-shadow 300ms;
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
+  border: 5px solid #000;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
+    border-top-left-radius: 40%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 40%;
+    z-index: -1;
+  }
+
+  &::before {
+    left: 0;
+    bottom: -50%; /* Adjusted position */
+    background-color: rgba(0, 0, 0, 0.15); /* Black with transparency */
+    animation: waves 6s infinite linear;
+  }
+
+  &::after {
+    left: -5%; /* Adjusted position */
+    bottom: -40%; /* Adjusted position */
+    background-color: rgba(255, 255, 255, 0.2); /* White with transparency */
+    animation: waves 7s infinite;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: calc(100% - 20px); /* Adjusted width */
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FF9900;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #FFD700;
+    }
+  }
+}
+
+@keyframes waves {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
