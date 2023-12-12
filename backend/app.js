@@ -32,7 +32,7 @@ const AWSCredentials = mongoose.model('AWSCredentials', {
 });
 
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage }).any(); // Modify this line to accept any type of file
+const upload = multer({ storage: storage }).any(); 
 
 const fileSchema = new mongoose.Schema({
   filename: String,
@@ -91,7 +91,7 @@ const configureS3 = async () => {
 app.post('/api/upload', upload, async (req, res) => {
   const uploadedFile = req.files[0];
   const fileName = req.body.fileName; // Retrieve fileName from the request body
-  const fileContent = uploadedFile.buffer.toString('utf-8'); // Convert buffer to string
+  const fileContent = uploadedFile.buffer.toString('utf-8'); 
 
   try {
     const s3 = await configureS3();

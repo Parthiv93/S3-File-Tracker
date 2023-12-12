@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import S3FileOperations from './components/S3FileOperations';
 import AWSCredentialsForm from './components/AWSCredentialsForm';
 
@@ -14,7 +12,7 @@ const App = () => {
   };
 
   return (
-    <div className="container mt-3">
+    <div className="login-container">
       {showAWSForm && (
         <AWSCredentialsForm onFormSubmit={handleFormSubmit} />
       )}

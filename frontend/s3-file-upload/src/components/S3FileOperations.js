@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AWSCredentialsForm from './AWSCredentialsForm'; 
+import '../styles/S3Form.css';
 
 const S3FileOperations = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [fileData, setFileData] = useState(null);
   const [awsCredentials, setAWSCredentials] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -37,8 +38,8 @@ const S3FileOperations = () => {
       const credentialsResponse = await axios.get('http://localhost:3001/api/aws-credentials');
       const credentials = credentialsResponse.data;
 
-      setAWSCredentials(credentials); // Set AWS credentials
-      setLoading(false); // Set loading to false
+      setAWSCredentials(credentials); 
+      setLoading(false);
 
       const response = await axios.get('http://localhost:3001/api/files', {
         headers: {
@@ -68,8 +69,8 @@ const S3FileOperations = () => {
     fetchUploadedFiles();
   }, []);
 
-  return (
-    <div>
+ return (
+    <div className="S3FileOperations">
       <h2>S3 File Operations</h2>
       {loading ? (
         <p>Loading...</p>
@@ -109,3 +110,4 @@ const S3FileOperations = () => {
 };
 
 export default S3FileOperations;
+

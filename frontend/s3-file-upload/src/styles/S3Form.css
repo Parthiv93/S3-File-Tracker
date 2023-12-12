@@ -1,0 +1,54 @@
+/* S3FileOperations.css */
+
+body {
+    background-color: #FF9900;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .S3FileOperations {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .S3FileOperations input {
+    font-family: 'Asap', sans-serif;
+    display: block;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 10px;
+    margin: 15px -10px;
+  }
+  
+  .S3FileOperations button {
+    font-family: 'Asap', sans-serif;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: 80px;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-left: -5px;
+    border-radius: 5px;
+    background-color: #FF9900;
+    transition: background-color 300ms;
+  
+    &:hover {
+      background-color: #cc7a00;
+    }
+  }
+  
+  /* Change the background color of the upload file button */
+  .S3FileOperations button.upload {
+    background-color: #FFD700; /* Change to a different color, e.g., Amazon Gold */
+  }
+  
+  .S3FileOperations p {
+    margin-top: 10px;
+  }
+  
