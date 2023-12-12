@@ -1,16 +1,16 @@
 # S3 File Tracker App
 
-This web application allows users to upload JSON files to Amazon S3 and view the list of uploaded files. It provides a simple interface to enter AWS credentials and perform file operations.
+Welcome to the S3 File Tracker App! This web application allows users to seamlessly interact with Amazon S3, enabling file uploads and easy management.
 
 ## Features
 
-- **AWS Credentials Entry**: Users can enter their AWS access key, secret key, region, and bucket name to configure the S3 connection.
+- **AWS Credentials Entry**: Configure your AWS access key, secret key, region, and bucket name effortlessly.
 
-- **File Upload**: Users can upload JSON files to their configured S3 bucket.
+- **File Upload**: Seamlessly upload JSON files to your S3 bucket.
 
-- **View Uploaded Files**: Users can view the list of files uploaded to their S3 bucket.
+- **View Uploaded Files**: Easily navigate and view the list of files stored in your S3 bucket.
 
-- **View File Data**: Users can click on a file to view its data in a line chart.
+- **View File Data**: Dive deeper by clicking on a file to view its data in a user-friendly line chart.
 
 ## Technologies Used
 
@@ -24,58 +24,62 @@ This web application allows users to upload JSON files to Amazon S3 and view the
 
 Before running the application, ensure you have the following installed:
 
-- Node.js and npm
-- MongoDB
-- AWS account with S3 bucket configured
+- **Node.js and npm**
+- **MongoDB**
+- **AWS account with S3 bucket configured**
 
 ## Installation
 
-1. Clone the repository:
+### Clone the Repository
 
 ```bash
-git clone https://github.com/Parthiv93/S3-File-Tracker.git
+ git clone https://github.com/Parthiv93/S3-File-Tracker.git
+ cd s3-file-tracker
+```
 
-2. Navigate to the project directory:
+## Install Dependencies
 
-cd s3-file-tracker
-
-3. Install dependencies for both frontend and backend:
-
+```bash
 cd frontend/s3-file-upload
 npm install
 cd ../backend
 npm install
+```
 
 ## Configuration
 
-1. Create a .env file in the backend directory with the following content:
+- **Create a .env file in the backend directory with the following content :**
 
+```bash
 MONGODB_URI=your_mongodb_connection_string
+```
 
 ## Run the Application
 
-1. Start the MongoDB server:
+- **Start MongoDB Server :**
 
 ```bash
 mongod
+```
 
-2. Start the backend server:
+- **Start Backend Server :**
 
+```bash
 cd backend
 npm start
+```
 
-3. Start the frontend server:
+- **Start Frontend Server :**
 
-cd frontend
+```bash
+cd frontend/s3-file-upload/src
 npm start
+```
 
-4. Open your browser and navigate to http://localhost:3000.
+- **Open your browser and navigate to http://localhost:3000**
 
-##Usage
+## Usage
 
-1. Enter your AWS credentials using the form provided.
-2. Upload files using the file upload section.
-3. View uploaded files and their data in the respective sections.
-
-
-
+- Enter your AWS credentials using the form provided.
+- Upload files using the file upload section.
+- View uploaded files and their data in the respective sections.
